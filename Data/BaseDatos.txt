@@ -1,0 +1,47 @@
+-- table person
+create table if not exists person(
+    id serial primary key,
+    "name" varchar(32) not null unique,
+    founder varchar(128),
+    logo varchar(255),
+    foundation_date date
+    );
+
+-- table client
+create table if not exists client(
+    id serial primary key,
+    "name" varchar(32) not null unique,
+    founder varchar(128),
+    logo varchar(255),
+    foundation_date date
+    );
+
+
+-- index for name
+create index name_company
+    on company("name");
+
+-- table web site
+create table if not exists account(
+    id serial primary key,
+    id_company bigint,
+    "name" varchar(32) not null unique,
+    category varchar(32) not null,
+    description text,
+    constraint fk_company
+    foreign key(id_company)
+    references company(id)
+    on delete cascade
+    );
+
+create table if not exists movements(
+    id serial primary key,
+    id_company bigint,
+    "name" varchar(32) not null unique,
+    category varchar(32) not null,
+    description text,
+    constraint fk_company
+    foreign key(id_company)
+    references company(id)
+    on delete cascade
+    );
