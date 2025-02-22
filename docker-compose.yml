@@ -1,0 +1,14 @@
+services:
+  db :
+    image: postgres:16.1
+    container_name: db-microservices
+    restart: always
+    volumes:
+      - ./sql/BaseDatos.sql:/docker-entrypoint-initdb.d/BaseDatos.sql
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    environment:
+      POSTGRES_DB: 'microservices-assessment'
+      POSTGRES_USER: 'devMCN'
+      POSTGRES_PASSWORD: 'm!srv2025@'
+    ports:
+      - '5433:5432'

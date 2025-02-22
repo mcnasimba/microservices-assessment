@@ -1,0 +1,15 @@
+server:
+  port: 3001
+
+spring:
+  application:
+    name: msvc-clients
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/microservices-assessment
+    username: devMCN
+    password: m!srv2025@
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
