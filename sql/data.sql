@@ -4,7 +4,7 @@ VALUES ('Juan Pérez', 'Masculino', 30, '12345678', 'Calle 123', '987654321'),
        ('María López', 'Femenino', 25, '87654321', 'Avenida 456', '912345678');
 
 -- Insertar Clientes
-INSERT INTO cliente (id_persona, contraseña, estado)
+INSERT INTO cliente (persona_id, password, estado)
 VALUES (1, 'pass123', 'Activo'),
        (2, 'clave456', 'Inactivo');
 

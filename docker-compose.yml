@@ -12,3 +12,14 @@ services:
       POSTGRES_PASSWORD: 'm!srv2025@'
     ports:
       - '5433:5432'
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: devMCN
+      RABBITMQ_DEFAULT_PASS: m!srv2025@

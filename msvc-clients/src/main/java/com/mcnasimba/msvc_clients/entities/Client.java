@@ -8,11 +8,11 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("clientes")
+@Table("cliente")
 public class Client extends Person{
     private String clienteId;
     private String password;
-    private Boolean estado;
+    private String estado;
 }
 
 

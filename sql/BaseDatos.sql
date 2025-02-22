@@ -1,6 +1,6 @@
 -- Table: persona
 CREATE TABLE if not exists persona (
-    id SERIAL PRIMARY KEY,
+    persona_id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     genero VARCHAR(20) NOT NULL CHECK (genero IN ('Masculino', 'Femenino', 'Other')),
     edad INT NOT NULL CHECK (edad >= 0),
@@ -12,10 +12,10 @@ CREATE TABLE if not exists persona (
 -- Table: cliente
 CREATE TABLE if not exists cliente (
     cliente_id SERIAL PRIMARY KEY,
-    id_persona INT UNIQUE NOT NULL,
-    contraseña VARCHAR(255) NOT NULL,
+    persona_id INT UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
     estado VARCHAR(20) NOT NULL CHECK (estado IN ('Activo', 'Inactivo', 'Bloqueado')),
-    FOREIGN KEY (id_persona) REFERENCES persona(id) ON DELETE CASCADE
+    FOREIGN KEY (persona_id) REFERENCES persona(persona_id) ON DELETE CASCADE
 );
 
 -- Table: cuenta
