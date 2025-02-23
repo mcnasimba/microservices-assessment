@@ -1,4 +1,4 @@
-package com.mcnasimba.msvc_accounts.configs;
+package com.mcnasimba.msvc_clients.config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -15,5 +15,4 @@ public class ModelMapperConfig {
                 .setSkipNullEnabled(true);
         return modelMapper;
     }
-
 }

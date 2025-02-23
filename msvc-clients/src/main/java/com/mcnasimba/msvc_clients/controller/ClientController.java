@@ -1,6 +1,7 @@
 package com.mcnasimba.msvc_clients.controller;
 
 import com.mcnasimba.msvc_clients.dtos.ClientDTO;
+import com.mcnasimba.msvc_clients.dtos.CreateClientDTO;
 import com.mcnasimba.msvc_clients.entities.Client;
 import com.mcnasimba.msvc_clients.services.ClientService;
 import lombok.AllArgsConstructor;
@@ -21,13 +22,13 @@ public class ClientController {
     }
 
     @GetMapping("/{idClient}")
-    public Mono<Client> getClientById(@PathVariable Long clientId){
-        return this.clientService.getClientById(clientId);
+    public Mono<ClientDTO> getClientById(@PathVariable Long idClient){
+        return this.clientService.getClientById(idClient);
     }
 
     @PostMapping()
-    public Mono<Client> createClient(@RequestBody Client client){
-        return  this.clientService.createClient(client);
+    public Mono<ClientDTO> createClient(@RequestBody CreateClientDTO  createClientDTO){
+        return  this.clientService.createClient(createClientDTO);
     }
 
     @DeleteMapping("/{idClient}")

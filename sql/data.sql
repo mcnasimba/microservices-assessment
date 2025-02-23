@@ -1,20 +1,20 @@
--- Insertar Personas
-INSERT INTO personas (nombre, genero, edad, identificacion, direccion, telefono)
-VALUES ('Juan Pérez', 'Masculino', 30, '12345678', 'Calle 123', '987654321'),
-       ('María López', 'Femenino', 25, '87654321', 'Avenida 456', '912345678');
+-- Insert Persons
+INSERT INTO persons (full_name, gender, age, identification, address, phone)
+VALUES ('Juan Pérez', 'Male', 30, '12345678', 'Calle 123', '987654321'),
+       ('María López', 'Female', 25, '87654321', 'Avenida 456', '912345678');
 
--- Insertar Clientes
-INSERT INTO clientes (persona_id, password, estado)
-VALUES (1, 'pass123', 'Activo'),
-       (2, 'clave456', 'Inactivo');
+-- Insert clients
+INSERT INTO clients (id_person, password, client_state)
+VALUES (1, 'pass123', 'Active'),
+       (2, 'clave456', 'Inactive');
 
--- Insertar Cuentas para los Clientes
-INSERT INTO cuentas (cliente_id, numero_cuenta, tipo_cuenta, saldo_inicial, estado)
-VALUES (1, '10001', 'Ahorros', 500.00, 'Activa'),
-       (2, '10002', 'Corriente', 1000.00, 'Activa');
+-- Insert Accounts para los Clients
+INSERT INTO accounts (id_client, account_number, account_type, initial_balance, account_state)
+VALUES (1, '10001', 'Savings', 500.00, 'Active'),
+       (2, '10002', 'Checking', 1000.00, 'Active');
 
--- Insertar Movimientos
-INSERT INTO movimientos (cuenta_id, tipo_movimiento, valor, saldo)
-VALUES (1, 'Deposito', 200.00, 700.00),
-       (1, 'Retiro', 100.00, 600.00),
-       (2, 'Deposito', 500.00, 1500.00);
+-- Insert Movements
+INSERT INTO movements (id_account, movement_type, amount, movement_state, balance)
+VALUES (1, 'Deposit', 200.00, true, 700.00),
+       (1, 'Retreat', 100.00, true, 600.00),
+       (2, 'Deposit', 500.00, true, 1500.00);

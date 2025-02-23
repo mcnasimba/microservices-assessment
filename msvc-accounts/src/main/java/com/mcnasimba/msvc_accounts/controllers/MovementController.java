@@ -1,5 +1,6 @@
 package com.mcnasimba.msvc_accounts.controllers;
 
+import com.mcnasimba.msvc_accounts.dtos.MovementDTO;
 import com.mcnasimba.msvc_accounts.entities.Movement;
 import com.mcnasimba.msvc_accounts.services.MovementService;
 import lombok.AllArgsConstructor;
@@ -15,17 +16,17 @@ public class MovementController {
     private final MovementService movementService;
 
     @GetMapping()
-    public Flux<Movement> getAllMovements(){
+    public Flux<MovementDTO> getAllMovements(){
         return this.movementService.getAllMovements();
     }
 
     @GetMapping("/{idMovement}")
-    public Mono<Movement> getMovementById(@PathVariable Long idMovement){
+    public Mono<MovementDTO> getMovementById(@PathVariable Long idMovement){
         return  this.movementService.getMovementById(idMovement);
     }
 
     @PostMapping
-    public Mono<Movement> createMovement(@RequestBody Movement movement){
+    public Mono<MovementDTO> createMovement(@RequestBody Movement movement){
         return this.movementService.createMovement(movement);
     }
 

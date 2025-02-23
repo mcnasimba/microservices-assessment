@@ -14,20 +14,20 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("cuentas")
+@Table("accounts")
 public class Account {
 
     @Id
-    private Long cuentaId;
+    private Long idAccount;
 
-    private Long clienteId;
+    private Long idClient;
 
-    private Long numeroCuenta;
+    private Long accountNumber;
 
-    private String tipoCuenta;
+    private String accountType;
 
-    private Long SaldoInicial;
+    private Long initialBalance;
 
-    private String estado;
+    private String accountState;
 
 }

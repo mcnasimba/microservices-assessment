@@ -42,7 +42,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Model Mappper dependency -->
+		<!-- Model Mapper dependency -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>

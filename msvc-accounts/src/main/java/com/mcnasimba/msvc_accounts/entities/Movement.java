@@ -12,19 +12,19 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("movimientos")
+@Table("movements")
 public class Movement {
 
     @Id
-    private UUID movimientoId=UUID.randomUUID();
+    private Long idMovement;
 
-    private Long cuentaId;
+    private Long idAccount;
 
-    private LocalDate fecha; //format: yyyy-mm-dd
+    private LocalDate transactionDate; //format: yyyy-mm-dd
 
-    private String tipoMovimiento;
+    private String movementType;
 
-    private Long valor;
+    private Long amount;
 
-    private Long saldo;
+    private Long balance;
 }

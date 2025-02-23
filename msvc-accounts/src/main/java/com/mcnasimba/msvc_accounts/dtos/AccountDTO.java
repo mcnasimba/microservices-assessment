@@ -16,18 +16,18 @@ public class AccountDTO {
 
     @NotNull(message = "Insert a clientId to continue")
     @NotBlank
-    private Long clienteId;
+    private Long idClient;
 
     @NotNull(message = "Insert an account number to continue")
     @NotBlank
-    private String numeroCuenta;
+    private String accountNumber;
 
     @NotNull
     @NotBlank
-    private String tipoCuenta;
+    private String accountType;
 
     @NotNull
     @NotBlank
     @Min(value = 1, message = "the initial balance must be greater than 0")
-    private Long SaldoInicial;
+    private Long initialBalance;
 }
