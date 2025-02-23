@@ -12,6 +12,8 @@ services:
       POSTGRES_PASSWORD: 'm!srv2025@'
     ports:
       - '5433:5432'
+    networks:
+      - msvc_assessment
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -23,3 +25,19 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: devMCN
       RABBITMQ_DEFAULT_PASS: m!srv2025@
+
+  #msvc-clients:
+  #  container_name: msvc-clients
+  #  build:
+  #    context: ./
+  #    dockerfile: ./msvc-clients/Dockerfile
+  #  ports:
+  #    - "3001:3001"
+  #  environment:
+  #    PORT: 3001
+  #  networks:
+  #    - msvc_assessment
+
+networks:
+  msvc_assessment:
+    name: msvc_assessment

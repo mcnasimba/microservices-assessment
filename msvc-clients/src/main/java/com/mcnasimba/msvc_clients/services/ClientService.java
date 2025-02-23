@@ -8,8 +8,8 @@ import reactor.core.publisher.Mono;
 public interface ClientService {
 
     public Flux<ClientDTO> getAllClients();
-    public Mono<Client> getClientById(String idClient);
+    public Mono<Client> getClientById(Long idClient);
     public Mono<Client> createClient(Client client);
-    public Mono<Void> deleteClient(String id);
+    public Mono<Void> deleteClient(Long idClient);
 
 }

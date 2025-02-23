@@ -8,9 +8,9 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("cliente")
+@Table("clientes")
 public class Client extends Person{
-    private String clienteId;
+    private Long clienteId;
     private String password;
     private String estado;
 }

@@ -1,5 +1,5 @@
 -- Table: persona
-CREATE TABLE if not exists persona (
+CREATE TABLE if not exists personas (
     persona_id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     genero VARCHAR(20) NOT NULL CHECK (genero IN ('Masculino', 'Femenino', 'Other')),
@@ -9,24 +9,24 @@ CREATE TABLE if not exists persona (
     telefono VARCHAR(20)
 );
 
--- Table: cliente
-CREATE TABLE if not exists cliente (
+-- Table: clientes
+CREATE TABLE if not exists clientes (
     cliente_id SERIAL PRIMARY KEY,
     persona_id INT UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     estado VARCHAR(20) NOT NULL CHECK (estado IN ('Activo', 'Inactivo', 'Bloqueado')),
-    FOREIGN KEY (persona_id) REFERENCES persona(persona_id) ON DELETE CASCADE
+    FOREIGN KEY (persona_id) REFERENCES personas(persona_id) ON DELETE CASCADE
 );
 
--- Table: cuenta
-CREATE TABLE if not exists cuenta (
+-- Table: cuentas
+CREATE TABLE if not exists cuentas (
     cuenta_id SERIAL PRIMARY KEY,
     cliente_id INT NOT NULL,
     numero_cuenta VARCHAR(50) UNIQUE NOT NULL,
     tipo_cuenta VARCHAR(20) NOT NULL CHECK (tipo_cuenta IN ('Ahorros', 'Corriente')),
     saldo_inicial DECIMAL(15,2) NOT NULL CHECK (saldo_inicial >= 0),
     estado VARCHAR(20) NOT NULL CHECK (estado IN ('Activa', 'Inactiva', 'Bloqueada')),
-    FOREIGN KEY (cliente_id) REFERENCES cliente(cliente_id) ON DELETE CASCADE
+    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id) ON DELETE CASCADE
 );
 
 -- Table: movimientos
@@ -37,5 +37,5 @@ CREATE TABLE if not exists movimientos (
     tipo_movimiento VARCHAR(20) NOT NULL CHECK (tipo_movimiento IN ('Deposito', 'Retiro')),
     valor DECIMAL(15,2) NOT NULL CHECK (valor > 0),
     saldo DECIMAL(15,2) NOT NULL CHECK (saldo >= 0),
-    FOREIGN KEY (cuenta_id) REFERENCES cuenta(cuenta_id) ON DELETE CASCADE
+    FOREIGN KEY (cuenta_id) REFERENCES cuentas(cuenta_id) ON DELETE CASCADE
 );

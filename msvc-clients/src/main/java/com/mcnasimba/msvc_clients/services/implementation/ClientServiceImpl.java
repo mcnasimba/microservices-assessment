@@ -26,7 +26,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Mono<Client> getClientById(String idClient) {
+    public Mono<Client> getClientById(Long idClient) {
         return clientRepository.findById(idClient);
     }
 
@@ -36,7 +36,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Mono<Void> deleteClient(String idClient) {
+    public Mono<Void> deleteClient(Long idClient) {
         return clientRepository.deleteById(idClient);
     }
 }
