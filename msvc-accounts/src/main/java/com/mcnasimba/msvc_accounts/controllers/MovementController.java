@@ -1,5 +1,6 @@
 package com.mcnasimba.msvc_accounts.controllers;
 
+import com.mcnasimba.msvc_accounts.dtos.CreateMovementDTO;
 import com.mcnasimba.msvc_accounts.dtos.MovementDTO;
 import com.mcnasimba.msvc_accounts.entities.Movement;
 import com.mcnasimba.msvc_accounts.services.MovementService;
@@ -26,8 +27,8 @@ public class MovementController {
     }
 
     @PostMapping
-    public Mono<MovementDTO> createMovement(@RequestBody Movement movement){
-        return this.movementService.createMovement(movement);
+    public Mono<MovementDTO> createMovement(@RequestBody CreateMovementDTO createMovementDTO){
+        return this.movementService.createMovement(createMovementDTO);
     }
 
     @DeleteMapping("/{idMovement}")

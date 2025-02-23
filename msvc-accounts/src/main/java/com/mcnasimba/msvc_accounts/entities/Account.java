@@ -22,11 +22,11 @@ public class Account {
 
     private Long idClient;
 
-    private Long accountNumber;
+    private String accountNumber;
 
     private String accountType;
 
-    private Long initialBalance;
+    private Float initialBalance;
 
     private String accountState;
 

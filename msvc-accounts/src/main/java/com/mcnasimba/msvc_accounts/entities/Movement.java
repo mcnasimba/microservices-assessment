@@ -1,18 +1,18 @@
 package com.mcnasimba.msvc_accounts.entities;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("movements")
+@Builder
 public class Movement {
 
     @Id
@@ -24,7 +24,9 @@ public class Movement {
 
     private String movementType;
 
-    private Long amount;
+    private Boolean movementState;
 
-    private Long balance;
+    private Float amount;
+
+    private Float balance;
 }

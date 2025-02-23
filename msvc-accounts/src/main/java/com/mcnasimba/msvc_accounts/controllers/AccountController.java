@@ -25,6 +25,11 @@ public class AccountController {
         return this.accountService.getAccountsById(idAccount);
     }
 
+    @GetMapping("/numberAccount/{accountNumber}")
+    public Mono<AccountDTO> getAccountByAccountNumber(@PathVariable String accountNumber){
+        return this.accountService.getAccountByAccountNumber(accountNumber);
+    }
+
     @PostMapping()
     public Mono<AccountDTO> createAccount(@RequestBody Account account){
         return this.accountService.createAccount(account);

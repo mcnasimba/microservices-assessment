@@ -29,5 +29,5 @@ public class AccountDTO {
     @NotNull
     @NotBlank
     @Min(value = 1, message = "the initial balance must be greater than 0")
-    private Long initialBalance;
+    private Float initialBalance;
 }

@@ -35,7 +35,7 @@ CREATE TABLE if not exists movements (
     id_account INT NOT NULL,
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     movement_type VARCHAR(20) NOT NULL CHECK (movement_type IN ('Retreat', 'Deposit')),
-    amount DECIMAL(15,2) NOT NULL CHECK (amount > 0),
+    amount DECIMAL(15,2) NOT NULL ,
     movement_state Boolean NOT NULL,
     balance DECIMAL(15,2) NOT NULL CHECK (balance >= 0),
     FOREIGN KEY (id_account) REFERENCES accounts(id_account) ON DELETE CASCADE

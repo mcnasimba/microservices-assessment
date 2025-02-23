@@ -17,13 +17,17 @@ import java.util.UUID;
 @Builder
 public class MovementDTO {
 
-    @NotNull(message = "Insert an account id to continue")
-    @NotBlank
-    private Long idAccount;
+//    @NotNull(message = "Insert an account id to continue")
+//    @NotBlank
+//    private Long idAccount;
+
+//    @NotNull
+//    @NotBlank
+//    private LocalDate transactionDate;
 
     @NotNull
     @NotBlank
-    private LocalDate transactionDate;
+    private String accountNumber;
 
     @NotNull
     @NotBlank
@@ -33,8 +37,8 @@ public class MovementDTO {
     @NotBlank
     private Long amount;
 
-    @NotNull
-    @NotBlank
-    private Long balance;
+//    @NotNull
+//    @NotBlank
+//    private Long balance;
 
 }
