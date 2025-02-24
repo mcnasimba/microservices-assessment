@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AccountDTO {
 
-    @NotNull(message = "Insert a clientId to continue")
+    @NotNull(message = "Insert a id client to continue")
     @NotBlank
     private Long idClient;
 
-    @NotNull(message = "Insert a clientId to continue")
+    @NotNull(message = "Insert a id account to continue")
     @NotBlank
     private Long idAccount;
 

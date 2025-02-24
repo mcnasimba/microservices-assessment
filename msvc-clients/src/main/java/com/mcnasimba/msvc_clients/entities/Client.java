@@ -17,9 +17,13 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Client{
     @Id
     private Long idClient;
+
     private Long idPerson;
+
     private String password;
+
     private String clientState;
+
     private AccountDTO[] accounts;
 }
 

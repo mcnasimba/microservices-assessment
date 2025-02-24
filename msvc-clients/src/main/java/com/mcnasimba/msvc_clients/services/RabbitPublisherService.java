@@ -17,16 +17,14 @@ public class RabbitPublisherService {
 
     public void sendMessage(MessagingDTO<?> messageDto) {
         try {
-            // Convierte el DTO a JSON
             String messageJson = objectMapper.writeValueAsString(messageDto);
-            log.info("Enviando mensaje: {}", messageJson);
-            // Envía el mensaje al exchange y routing key configurados
+            log.info("Send Message: {}", messageJson);
             rabbitTemplate.convertAndSend(
                     RabbitAccountsChannel.ACCOUNTS_EXCHANGE,
                     RabbitAccountsChannel.ACCOUNTS_ROUTING_KEY,
                     messageJson);
         } catch (Exception e) {
-            log.error("Error al enviar mensaje: {}", e.getMessage());
+            log.error("Error to send message: {}", e.getMessage());
         }
     }
 }

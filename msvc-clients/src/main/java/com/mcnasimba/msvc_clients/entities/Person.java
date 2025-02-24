@@ -16,11 +16,17 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Person {
     @Id
     private Long idPerson;
+
     private String fullName;
+
     private String gender;
+
     private int age;
+
     private String identification;
+
     private String address;
+
     private String phone;
 
 }

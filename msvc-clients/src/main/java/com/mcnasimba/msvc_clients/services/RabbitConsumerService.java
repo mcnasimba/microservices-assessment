@@ -17,14 +17,12 @@ public class RabbitConsumerService {
     @RabbitListener(queues = RabbitAccountsChannel.ACCOUNTS_QUEUE)
     public void receiveMessage(String messageJson) {
         try {
-            // Supongamos que el payload es String; si es otro tipo, utiliza el TypeReference adecuado
             MessagingDTO<String> messagingDTO = objectMapper.readValue(messageJson, MessagingDTO.class);
-            log.info("Mensaje recibido: UUID: {}, Source: {}, Detail: {}, Payload: {}",
+            log.info("Message receipt: UUID: {}, Source: {}, Detail: {}, Payload: {}",
                     messagingDTO.getUuid(), messagingDTO.getSource(),
                     messagingDTO.getDetailType(), messagingDTO.getPayload());
-            // Procesa el mensaje según tu lógica de negocio
         } catch (Exception e) {
-            log.error("Error al procesar el mensaje: {}", e.getMessage());
+            log.error("Error to process message: {}", e.getMessage());
         }
     }
 }
