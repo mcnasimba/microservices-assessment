@@ -25,18 +25,40 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: devMCN
       RABBITMQ_DEFAULT_PASS: m!srv2025@
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - msvc_assessment
 
-  #msvc-clients:
-  #  container_name: msvc-clients
-  #  build:
-  #    context: ./
-  #    dockerfile: ./msvc-clients/Dockerfile
-  #  ports:
-  #    - "3001:3001"
-  #  environment:
-  #    PORT: 3001
-  #  networks:
-  #    - msvc_assessment
+  msvc-clients:
+    container_name: msvc-clients
+    build:
+      context: ./
+      dockerfile: ./msvc-clients/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - msvc_assessment
+
+  msvc-accounts:
+    container_name: msvc-accounts
+    build:
+      context: ./
+      dockerfile: ./msvc-accounts/Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: 3002
+    networks:
+      - msvc_assessment
 
 networks:
   msvc_assessment:

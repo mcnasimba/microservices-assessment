@@ -35,7 +35,7 @@ import java.util.Arrays;
 public class AccountServiceImpl implements AccountService {
 
     private final WebClient.Builder webClientBuilder;
-    public static final String ACCOUNTS_MICROSERVICE_URL = "http://localhost:3002";
+    public static final String ACCOUNTS_MICROSERVICE_URL = "http://msvc-accounts:3002";
 
     @Override
     public Flux<AccountMicroserviceDTO[]> findAllAccountByIdClient(Long idClient) {

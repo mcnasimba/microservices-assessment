@@ -12,11 +12,15 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 //@Configuration
 public class RabbitMQConfig {
 
     @Value("${spring.rabbitmq.host}")
     private String rabbitMQServer;
+
+    @Value("${spring.rabbitmq.password}")
+    private String rabbitPassword;
 
     @Bean("rabbitConnectionFactory")
     public ConnectionFactory connectionFactory(){

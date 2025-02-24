@@ -1,7 +1,6 @@
 package com.mcnasimba.msvc_clients.entities;
 
 import com.mcnasimba.msvc_clients.dtos.accounts.AccountDTO;
-import com.mcnasimba.msvc_clients.enums.ClientState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

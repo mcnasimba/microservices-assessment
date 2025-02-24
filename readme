@@ -1,0 +1,43 @@
+🚀 Use in project
+
+Java 21
+
+Spring Boot 3.4.3
+
+Spring WebFlux
+
+Spring Data R2DBC
+
+PostgresSQL
+
+Docker y Docker Compose
+
+ModelMapper
+
+msvc-clients
+    PORT: 3001
+
+msvc-accounts
+    PORT: 3002
+
+#Json - create Client
+{
+  "fullName": "Juan Pérez",
+  "gender": "Male",
+  "age": 30,
+  "identification": "1722345244",
+  "clientState": "Active",
+  "address": "Calle 123",
+  "phone": "987654321",
+  "password": "pass123"
+}
+
+#Json - create Movement
+{
+  "accountNumber": "10001",
+  "amount": -200
+}
+
+🛠 Configuration y Deployment
+
+    - Execute command in root: docker-compose up --build

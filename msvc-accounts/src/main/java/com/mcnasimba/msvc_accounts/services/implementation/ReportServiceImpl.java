@@ -25,7 +25,7 @@ public class ReportServiceImpl implements ReportService {
     public Flux<AccountStateDTO> getAccountState(Long idClient, LocalDate minDate, LocalDate maxDate) {
 
         return this.accountService.getAccountsByIdClient(idClient)
-                .switchIfEmpty(Flux.error(new Exception("No se han encontrado cuentas del cliente")))
+                .switchIfEmpty(Flux.error(new Exception("Any account was find")))
                 .flatMap(account -> movementService.getMovementsByAccountNumber(account.getIdAccount())
                         .filter(movement ->  {
                             LocalDate movementDate = movement.getTransactionDate();

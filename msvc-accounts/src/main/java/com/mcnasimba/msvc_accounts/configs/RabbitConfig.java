@@ -18,6 +18,9 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.host}")
     private String rabbitMQServer;
 
+    @Value("${spring.rabbitmq.password}")
+    private String rabbitPassword;
+
     @Bean("rabbitConnectionFactory")
     public ConnectionFactory connectionFactory(){
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();

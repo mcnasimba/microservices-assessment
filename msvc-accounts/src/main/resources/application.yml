@@ -5,11 +5,11 @@ spring:
   application:
     name: msvc-accounts
   r2dbc:
-    url: r2dbc:postgresql://localhost:5433/microservices-assessment
+    url: r2dbc:postgresql://db:5432/microservices-assessment
     username: devMCN
     password: m!srv2025@
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: devMCN
     password: m!srv2025@

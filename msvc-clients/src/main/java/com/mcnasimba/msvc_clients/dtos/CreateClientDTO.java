@@ -1,6 +1,5 @@
 package com.mcnasimba.msvc_clients.dtos;
 
-import com.mcnasimba.msvc_clients.enums.ClientState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
