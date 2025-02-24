@@ -23,27 +23,33 @@ public class ClientController {
     private final AccountService accountService;
 
     @GetMapping()
-    public Flux<ClientDTO> getAllClients(){
-        return clientService.getAllClients();
+    public Mono<ResponseEntity<Flux<ClientDTO>>> getAllClients(){
+        Flux<ClientDTO> clients = clientService.getAllClients();
+        return Mono.just(ResponseEntity.ok(clients));
     }
 
     @GetMapping("/{idClient}")
-    public Mono<ClientDTO> getClientById(@PathVariable Long idClient){
-        return this.clientService.getClientById(idClient);
+    public Mono<ResponseEntity<ClientDTO>> getClientById(@PathVariable Long idClient){
+        return clientService.getClientById(idClient)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/client-account/{idClient}")
-    public Flux<AccountMicroserviceDTO[]> getAccountsByClientId(@PathVariable("idClient") Long idClient) {
-        return this.accountService.findAllAccountByIdClient(idClient);
+    public Mono<ResponseEntity<Flux<AccountMicroserviceDTO[]>>> getAccountsByClientId(@PathVariable("idClient") Long idClient) {
+        Flux<AccountMicroserviceDTO[]> accounts = accountService.findAllAccountByIdClient(idClient);
+        return Mono.just(ResponseEntity.ok(accounts));
     }
 
     @PostMapping()
-    public Mono<ClientDTO> createClient(@RequestBody CreateClientDTO  createClientDTO){
-        return  this.clientService.createClient(createClientDTO);
+    public Mono<ResponseEntity<ClientDTO>> createClient(@RequestBody CreateClientDTO createClientDTO){
+        return clientService.createClient(createClientDTO)
+                .map(createdClient -> ResponseEntity.status(HttpStatus.CREATED).body(createdClient));
     }
 
     @DeleteMapping("/{idClient}")
-    public Mono<Void> deleteClient(@PathVariable Long idClient){
-        return this.clientService.deleteClient(idClient);
+    public Mono<ResponseEntity<Void>> deleteClient(@PathVariable Long idClient){
+        return clientService.deleteClient(idClient)
+                .then(Mono.just(ResponseEntity.noContent().build()));
     }
 }

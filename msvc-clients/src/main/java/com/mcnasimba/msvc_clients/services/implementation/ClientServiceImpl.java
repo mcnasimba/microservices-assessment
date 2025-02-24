@@ -38,27 +38,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Mono<ClientDTO> createClient(CreateClientDTO  createClientDTO) {
-
-        Person personCreate = Person.builder()
-                .fullName(createClientDTO.getFullName())
-                .age(createClientDTO.getAge())
-                .gender(createClientDTO.getGender())
-                .phone(createClientDTO.getPhone())
-                .address(createClientDTO.getAddress())
-                .identification(createClientDTO.getIdentification())
-                .build();
-
-        return personRepository
-                .save(personCreate)
-                .flatMap(personSaved -> {
-                    Client clientCreate = Client.builder()
-                            .idPerson(personSaved.getIdPerson())
-                            .password(createClientDTO.getPassword())
-                            .clientState(createClientDTO.getClientState())
-                            .build();
-                    return clientRepository.save(clientCreate);
-                }).map(clientSaved->modelMapper.map(clientSaved, ClientDTO.class));
+    public Mono<ClientDTO> createClient(CreateClientDTO createClientDTO) {
+        Person person = toPerson(createClientDTO);
+        return personRepository.save(person)
+                .flatMap(savedPerson -> clientRepository.save(toClient(createClientDTO, savedPerson.getIdPerson())))
+                .map(savedClient -> modelMapper.map(savedClient, ClientDTO.class));
     }
 
     @Override
@@ -69,5 +53,25 @@ public class ClientServiceImpl implements ClientService {
                         clientRepository.delete(client)
                                 .then(personRepository.deleteById(client.getIdPerson()))
                 );
+    }
+
+    /* ---- Helpers ---- */
+    private Person toPerson(CreateClientDTO dto) {
+        return Person.builder()
+                .fullName(dto.getFullName())
+                .age(dto.getAge())
+                .gender(dto.getGender())
+                .phone(dto.getPhone())
+                .address(dto.getAddress())
+                .identification(dto.getIdentification())
+                .build();
+    }
+
+    private Client toClient(CreateClientDTO dto, Long idPerson) {
+        return Client.builder()
+                .idPerson(idPerson)
+                .password(dto.getPassword())
+                .clientState(dto.getClientState())
+                .build();
     }
 }

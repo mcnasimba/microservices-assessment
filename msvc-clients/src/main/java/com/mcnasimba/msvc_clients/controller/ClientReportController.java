@@ -9,6 +9,7 @@ import com.mcnasimba.msvc_clients.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,23 +26,23 @@ public class ClientReportController {
     private final ModelMapper modelMapper;
 
     @GetMapping("/{idClient}")
-    public Mono<ClientStateDTO> getStateAccountByIdClient(@PathVariable("idClient") Long idClient,
-                                                          @RequestParam("minDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate minDate,
-                                                          @RequestParam("maxDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxDate) {
+    public Mono<ResponseEntity<ClientStateDTO>> getStateAccountByIdClient(
+            @PathVariable("idClient") Long idClient,
+            @RequestParam("minDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate minDate,
+            @RequestParam("maxDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxDate) {
+
         return clientService.getClientById(idClient)
-                .flatMap(client -> {
-                    ClientStateDTO clientStateDTO = modelMapper.map(client, ClientStateDTO.class);
-                    return accountService.getReportByIdClient(idClient, minDate, maxDate)
-                            .collectList()
-                            .map(reportList -> {
-                                ClientStateDTO stateClient = modelMapper.map(client, ClientStateDTO.class);
-                                stateClient.setMovements(reportList);
-
-                                return stateClient;
-                            });
-                });
-
-
+                .flatMap(client ->
+                        accountService.getReportByIdClient(idClient, minDate, maxDate)
+                                .collectList()
+                                .map(reportList -> {
+                                    ClientStateDTO stateClient = modelMapper.map(client, ClientStateDTO.class);
+                                    stateClient.setMovements(reportList);
+                                    return stateClient;
+                                })
+                )
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
 }

@@ -3,6 +3,7 @@ package com.mcnasimba.msvc_accounts.services.implementation;
 import com.mcnasimba.msvc_accounts.dtos.CreateMovementDTO;
 import com.mcnasimba.msvc_accounts.dtos.MovementDTO;
 import com.mcnasimba.msvc_accounts.dtos.UpdateBalanceAccount;
+import com.mcnasimba.msvc_accounts.entities.Account;
 import com.mcnasimba.msvc_accounts.entities.Movement;
 import com.mcnasimba.msvc_accounts.repositories.AccountRepository;
 import com.mcnasimba.msvc_accounts.repositories.MovementRepository;
@@ -50,45 +51,49 @@ public class MovementServiceImpl implements MovementService {
 
     @Override
     public Mono<MovementDTO> createMovement(CreateMovementDTO createMovementDTO) {
-        return this.accountRepository.findByAccountNumber(createMovementDTO.getAccountNumber())
-                .switchIfEmpty(Mono.error(new Exception("Cuenta no encontrada")))
-                .flatMap(account->{
-                    Float currentBalance = account.getInitialBalance();
-                    Float movementAmount = createMovementDTO.getAmount();
-                    float newBalance = currentBalance + movementAmount;
-
-                    if(newBalance==0)
-                        return Mono.error(new Exception("Transaction amount must be diferent to zero"));
-
-                    if(newBalance<0)
-                        return Mono.error(new Exception("Amount not allowed"));
-
-                    String movementType = newBalance>0?"Retreat":"Deposit";
-
-                    account.setInitialBalance(newBalance);
-
-                    UpdateBalanceAccount updateAccount = UpdateBalanceAccount
-                            .builder()
-                            .initialBalance(newBalance)
-                            .build();
-
-                    return accountService.updateAccount(createMovementDTO.getAccountNumber(), updateAccount)
-                            .flatMap(updatedAccount -> {
-                                Movement movementCreate = Movement.builder()
-                                        .idAccount(account.getIdAccount())
-                                        .movementType(movementType)
-                                        .movementState(true)
-                                        .balance(newBalance)
-                                        .amount(createMovementDTO.getAmount())
-                                        .build();
-                                   //Movement movementCreate = modelMapper.map(createMovementDTO, Movement.class);
-                                   return movementRepository.save(movementCreate);
-                            });
-                }).map(s -> modelMapper.map(s, MovementDTO.class));
+        return accountRepository.findByAccountNumber(createMovementDTO.getAccountNumber())
+                .switchIfEmpty(Mono.error(new Exception("Not found account")))
+                .flatMap(account -> updateAccountBalance(account, createMovementDTO.getAmount())
+                        .flatMap(newBalance ->
+                                movementRepository.save(buildMovement(createMovementDTO, account, newBalance))
+                        )
+                )
+                .map(savedMovement -> modelMapper.map(savedMovement, MovementDTO.class));
     }
 
     @Override
     public Mono<Void> deleteMovement(Long idMovement) {
         return this.movementRepository.deleteById(idMovement);
+    }
+
+    /* ---- Helpers ----*/
+    private Mono<Float> updateAccountBalance(Account account, Float movementAmount) {
+        float newBalance = account.getInitialBalance() + movementAmount;
+
+        if (newBalance == 0)
+            return Mono.error(new IllegalArgumentException("Amount must be different to Zero"));
+
+        if (newBalance < 0)
+            return Mono.error(new IllegalArgumentException("Balance is not sufficient"));
+
+
+        account.setInitialBalance(newBalance);
+        UpdateBalanceAccount update = UpdateBalanceAccount.builder()
+                .initialBalance(newBalance)
+                .build();
+
+        return accountService.updateAccount(account.getAccountNumber(), update)
+                .map(updated -> newBalance);
+    }
+
+    private Movement buildMovement(CreateMovementDTO dto, Account account, float newBalance) {
+        String movementType = dto.getAmount() < 0 ? "Retreat" : "Deposit";
+        return Movement.builder()
+                .idAccount(account.getIdAccount())
+                .movementType(movementType)
+                .movementState(true)
+                .balance(newBalance)
+                .amount(dto.getAmount())
+                .build();
     }
 }
