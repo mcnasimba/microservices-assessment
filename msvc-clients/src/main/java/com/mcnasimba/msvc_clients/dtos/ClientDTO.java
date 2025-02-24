@@ -6,10 +6,12 @@ import com.mcnasimba.msvc_clients.enums.ClientState;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class ClientDTO {
 
     //Client details

@@ -1,5 +1,6 @@
 package com.mcnasimba.msvc_clients.entities;
 
+import com.mcnasimba.msvc_clients.dtos.accounts.AccountDTO;
 import com.mcnasimba.msvc_clients.enums.ClientState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Client{
     private Long idPerson;
     private String password;
     private String clientState;
+    private AccountDTO[] accounts;
 }
 
 

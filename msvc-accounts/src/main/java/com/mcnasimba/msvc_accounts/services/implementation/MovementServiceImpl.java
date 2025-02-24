@@ -43,6 +43,12 @@ public class MovementServiceImpl implements MovementService {
     }
 
     @Override
+    public Flux<MovementDTO> getMovementsByAccountNumber(Long idAccount) {
+        return this.movementRepository.findByIdAccount(idAccount)
+                .map(movement -> modelMapper.map(movement, MovementDTO.class));
+    }
+
+    @Override
     public Mono<MovementDTO> createMovement(CreateMovementDTO createMovementDTO) {
         return this.accountRepository.findByAccountNumber(createMovementDTO.getAccountNumber())
                 .switchIfEmpty(Mono.error(new Exception("Cuenta no encontrada")))

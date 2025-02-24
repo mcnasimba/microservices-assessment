@@ -21,9 +21,13 @@ public class MovementDTO {
 //    @NotBlank
 //    private Long idAccount;
 
-//    @NotNull
-//    @NotBlank
-//    private LocalDate transactionDate;
+    @NotNull
+    @NotBlank
+    private Long idMovement;
+
+    @NotNull
+    @NotBlank
+    private LocalDate transactionDate;
 
     @NotNull
     @NotBlank
@@ -35,10 +39,14 @@ public class MovementDTO {
 
     @NotNull
     @NotBlank
+    private String movementState;
+
+    @NotNull
+    @NotBlank
     private Long amount;
 
-//    @NotNull
-//    @NotBlank
-//    private Long balance;
+    @NotNull
+    @NotBlank
+    private Long balance;
 
 }

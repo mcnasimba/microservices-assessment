@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 public interface AccountService {
     public Flux<AccountDTO> getAllAccounts();
     public Mono<AccountDTO> getAccountsById(Long idAccount);
+    public Flux<AccountDTO> getAccountsByIdClient(Long idClient);
     public Mono<AccountDTO> getAccountByAccountNumber(String accountNumber);
     public Mono<AccountDTO> createAccount(Account account);
     public Mono<AccountDTO> updateAccount(String accountNumber, UpdateBalanceAccount updateBalanceAccount);

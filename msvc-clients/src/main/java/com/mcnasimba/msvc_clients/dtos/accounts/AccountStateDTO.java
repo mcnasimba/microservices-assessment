@@ -1,6 +1,6 @@
-package com.mcnasimba.msvc_accounts.dtos;
+package com.mcnasimba.msvc_clients.dtos.accounts;
 
-import com.mcnasimba.msvc_accounts.entities.Movement;
+import com.mcnasimba.msvc_clients.dtos.ClientDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

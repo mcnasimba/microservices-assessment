@@ -1,4 +1,4 @@
-package com.mcnasimba.msvc_accounts.dtos;
+package com.mcnasimba.msvc_clients.dtos.accounts;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -12,15 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AccountDTO {
+public class AccountMicroserviceDTO {
 
     @NotNull(message = "Insert a clientId to continue")
     @NotBlank
     private Long idClient;
-
-    @NotNull(message = "Insert a clientId to continue")
-    @NotBlank
-    private Long idAccount;
 
     @NotNull(message = "Insert an account number to continue")
     @NotBlank

@@ -24,6 +24,10 @@ public class AccountController {
     public Mono<AccountDTO> getAccountById(@PathVariable Long idAccount){
         return this.accountService.getAccountsById(idAccount);
     }
+    @GetMapping("/client-account/{idClient}")
+    public Flux<AccountDTO> getAccountsByClientId(@PathVariable Long idClient){
+        return this.accountService.getAccountsByIdClient(idClient);
+    }
 
     @GetMapping("/numberAccount/{accountNumber}")
     public Mono<AccountDTO> getAccountByAccountNumber(@PathVariable String accountNumber){

@@ -33,6 +33,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Flux<AccountDTO> getAccountsByIdClient(Long idClient) {
+        return this.accountRepository.findByIdClient(idClient)
+                .map(account->modelMapper.map(account, AccountDTO.class));
+    }
+
+    @Override
     public Mono<AccountDTO> getAccountByAccountNumber(String accountNumber) {
         return this.accountRepository
                 .findByAccountNumber(accountNumber)

@@ -8,6 +8,11 @@ spring:
     url: r2dbc:postgresql://localhost:5433/microservices-assessment
     username: devMCN
     password: m!srv2025@
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: devMCN
+    password: m!srv2025@
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
